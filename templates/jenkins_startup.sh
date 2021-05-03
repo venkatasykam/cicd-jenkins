@@ -183,7 +183,9 @@ function plugins()
 
 function job_insert()
 {
-    java -jar jenkins-cli.jar -s "$jenkins_address" -auth $jenkins_user:$jenkins_password  create-job jobmaster < $jenkins_templeta_directory/jobmaster.xml
+    #java -jar jenkins-cli.jar -s "$jenkins_address" -auth $jenkins_user:$jenkins_password  create-job jobmaster < $jenkins_templeta_directory/jobmaster.xml
+    
+    java -jar jenkins-cli.jar -s "$jenkins_address" -auth $jenkins_user:$jenkins_password  create-job jobmaster < jobmaster.xml
     
     echo "[INFO]   job is registered"
 }
@@ -207,7 +209,7 @@ function installing_final()
     
     plugins
     
-    job_insert
+    #job_insert
     
     installing_final
 
