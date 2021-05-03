@@ -73,7 +73,7 @@ resource "aws_instance" "jenkins" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
-      timeout = "1m"
+      timeout = "5m"
       private_key = "${file("templates/${var.jenkins_key_name}.pem")}"
     }
     source = "templates/jenkins_startup.sh"
@@ -85,7 +85,7 @@ resource "aws_instance" "jenkins" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
-      timeout = "1m"
+      timeout = "5m"
       private_key = "${file("templates/${var.jenkins_key_name}.pem")}"
     }
     source = "templates/jobmaster.xml"
@@ -96,7 +96,7 @@ resource "aws_instance" "jenkins" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
-      timeout = "1m"
+      timeout = "5m"
       private_key = "${file("templates/${var.jenkins_key_name}.pem")}"
     }
     inline = [
