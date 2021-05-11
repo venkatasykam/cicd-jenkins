@@ -4,16 +4,6 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "access_key" {
-  default  = "HEREYOURACCESSKEY"
-  description = "AWS credentials file path"
-}
-
-variable "secret_key" {
-  default  = "HEREYOURSECRETKEY"
-  description = "AWS credentials file path"
-}
-
 variable "jenkins_user_name" {
   description = "jenkins"
   default = "jenkins"
@@ -25,8 +15,8 @@ variable "jenkins_user_password" {
 }
 
 variable "jenkins_name" {
-  description = "Jenkins name"
-  default = "jenkins"
+  description = "V2 DevOps Jenkins"
+  default = "V2DevOps-Jenkins-master"
 }
 
 variable "jenkins_instance_type" {
@@ -41,6 +31,6 @@ variable "jenkins_key_name" {
 variable "amis" {
   description = "ami to spawn."
   default = { 
-    us-east-1 = "ami-0c94855ba95c71c99"
+    us-east-1 = "ami-096fda3c22c1c990a"
   }
 }
