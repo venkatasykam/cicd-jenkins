@@ -14,9 +14,14 @@ variable "jenkins_user_password" {
   default = "jenkins"
 }
 
-variable "jenkins_name" {
+variable "jenkins_master_name" {
   description = "V2 DevOps Jenkins"
   default = "V2DevOps-Jenkins-master"
+}
+
+variable "jenkins_node_name" {
+  description = "V2 DevOps Jenkins"
+  default = "V2DevOps-Jenkins-node"
 }
 
 variable "jenkins_instance_type" {
