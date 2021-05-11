@@ -1,6 +1,4 @@
 provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
   region = "${var.region}"
 }
 
@@ -67,9 +65,13 @@ resource "aws_instance" "jenkins" {
   security_groups = ["${aws_security_group.security_group_jenkins.name}"]
   ami = "${lookup(var.amis, var.region)}"
   key_name = "${var.jenkins_key_name}"
+  
+  tags = {
+    Name = "${var.jenkins_name}"
+  }
 
   # Add jenkins server startup
-  provisioner "file" {
+  provisioner "jenkins_startup_file_copy" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
@@ -81,7 +83,7 @@ resource "aws_instance" "jenkins" {
   }
   
   # Add jenkins job
-  provisioner "file" {
+  provisioner "jenkins_job_config_file_copy" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
@@ -92,7 +94,7 @@ resource "aws_instance" "jenkins" {
     destination = "/home/ec2-user/jobmaster.xml"
   }
 
-  provisioner "remote-exec" {
+  provisioner "jenkins_installation" {
     connection {
       user = "ec2-user"
       host = "${aws_instance.jenkins.public_ip}"
@@ -101,6 +103,7 @@ resource "aws_instance" "jenkins" {
     }
     inline = [
       "chmod +x /home/ec2-user/jenkins*.sh",
+      "chmod 777 /home/ec2-user/jobmaster.xml",
       "/home/ec2-user/jenkins_startup.sh ${var.jenkins_user_name} ${var.jenkins_user_password}"
     ]
   }
